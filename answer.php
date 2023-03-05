@@ -10,7 +10,7 @@ $data = json_decode(file_get_contents('php://input'), TRUE);
 # Обрабатываем ручной ввод или нажатие на кнопку
 $data = $data['callback_query'] ? $data['callback_query'] : $data['message'];
 # Важные константы
-define('TOKEN', '6170296157:AAGjoKIWQjtMwD_aEE9vYtG0mZSMcZ9toHI');
+define('TOKEN', getenv('TELEGRAM_TOKEN'));
 
 # Записываем сообщение пользователя
 $message = mb_strtolower(($data['text'] ? $data['text'] : $data['data']), 'utf-8');
@@ -96,46 +96,39 @@ switch (strtolower($message)) {
 }
 
 if (isset($data['callback_query'])) {
-    # User clicked on a button in the inline keyboard
     $callback_data = $data['callback_query']['data'];
     switch ($callback_data) {
         case 'project1':
-            # Handle user's response to the 'Fragrancia' button
             $method = 'sendMessage';
             $send_data = [
                 'text' => 'You clicked on the Fragrancia button'
             ];
             break;
         case 'project2':
-            # Handle user's response to the 'Holten' button
             $method = 'sendMessage';
             $send_data = [
                 'text' => 'You clicked on the Holten button'
             ];
             break;
         case 'project3':
-            # Handle user's response to the 'ML' button
             $method = 'sendMessage';
             $send_data = [
                 'text' => 'You clicked on the ML button'
             ];
             break;
         case 'project4':
-            # Handle user's response to the 'Qamal' button
             $method = 'sendMessage';
             $send_data = [
                 'text' => 'You clicked on the Qamal button'
             ];
             break;
         case 'project5':
-            # Handle user's response to the 'Ecohorica' button
             $method = 'sendMessage';
             $send_data = [
                 'text' => 'You clicked on the Ecohorica button'
             ];
             break;
         case 'project6':
-            # Handle user's response to the 'SD' button
             $method = 'sendMessage';
             $send_data = [
                 'text' => 'You clicked on the SD button'

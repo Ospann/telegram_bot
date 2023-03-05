@@ -1,7 +1,7 @@
 <?php
 date_default_timezone_set('Asia/Almaty');
 
-$BOT_TOKEN = '6170296157:AAGjoKIWQjtMwD_aEE9vYtG0mZSMcZ9toHI';
+$BOT_TOKEN = getenv('TELEGRAM_TOKEN');
 $CHAT_ID = '982824929';
 
 $now = new DateTime();
