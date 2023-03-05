@@ -17,7 +17,7 @@ $message = mb_strtolower(($data['text'] ? $data['text'] : $data['data']), 'utf-8
 
 $keybord = [
                     [
-                        ['text' => 'events list'],
+                        ['text' => 'Events list'],
                         ['text' => '...'],
                     ],
                     [
@@ -26,7 +26,7 @@ $keybord = [
                 ];
 
 # Обрабатываем сообщение
-switch ($message) {
+switch (strtolower($message)) {
     case '/start':
         $method = 'sendMessage';
         $send_data = [
