@@ -37,7 +37,7 @@ switch ($message) {
             ]
         ];
         break;
-    case 'check':
+    case 'Events':
         $method = 'sendMessage';
         $send_data = [
             'text'   => 'Events not exist',
