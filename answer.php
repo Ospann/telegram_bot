@@ -17,7 +17,7 @@ $message = mb_strtolower(($data['text'] ? $data['text'] : $data['data']), 'utf-8
 
 $keybord = [
                     [
-                        ['text' => 'check'],
+                        ['text' => 'Events'],
                         ['text' => '...'],
                     ],
                     [
