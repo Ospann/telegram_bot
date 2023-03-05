@@ -8,7 +8,12 @@ $data = json_decode(file_get_contents('php://input'), TRUE);
 
 
 # Обрабатываем ручной ввод или нажатие на кнопку
-$data = $data['callback_query'] ? $data['callback_query'] : $data['message'];
+// $data = $data['callback_query'] ? $data['callback_query'] : $data['message'];
+if (isset($data['callback_query'])) {
+    $data = $data['callback_query'];
+} else {
+    $data = $data['message'];
+}
 # Важные константы
 define('TOKEN', '6170296157:AAGjoKIWQjtMwD_aEE9vYtG0mZSMcZ9toHI');
 
@@ -16,14 +21,14 @@ define('TOKEN', '6170296157:AAGjoKIWQjtMwD_aEE9vYtG0mZSMcZ9toHI');
 $message = mb_strtolower(($data['text'] ? $data['text'] : $data['data']), 'utf-8');
 
 $keybord = [
-                    [
-                        ['text' => 'Events list'],
-                        ['text' => 'Check my current hours'],
-                    ],
-                    [
-                        ['text' => 'Add Hours'],
-                    ]
-                ];
+    [
+        ['text' => 'Events list'],
+        ['text' => 'Check my current hours'],
+    ],
+    [
+        ['text' => 'Add Hours'],
+    ]
+];
 
 # Обрабатываем сообщение
 switch (strtolower($message)) {
@@ -64,22 +69,40 @@ switch (strtolower($message)) {
             'reply_markup' => [
                 'inline_keyboard' => [
                     [
-                        ['text' => 'Fragrancia', 'callback_data' => 'project1'],
+                        [
+                            'text' => 'Fragrancia',
+                            'callback_data' => 'project1'
+                        ],
                     ],
                     [
-                        ['text' => 'Holten', 'callback_data' => 'project2'],
+                        [
+                            'text' => 'Holten',
+                            'callback_data' => 'project2'
+                        ],
                     ],
                     [
-                        ['text' => 'ML', 'callback_data' => 'project3'],
+                        [
+                            'text' => 'ML',
+                            'callback_data' => 'project3'
+                        ],
                     ],
                     [
-                        ['text' => 'Qamal', 'callback_data' => 'project4'],
+                        [
+                            'text' => 'Qamal',
+                            'callback_data' => 'project4'
+                        ],
                     ],
                     [
-                        ['text' => 'Ecohorica', 'callback_data' => 'project5'],
+                        [
+                            'text' => 'Ecohorica',
+                            'callback_data' => 'project5'
+                        ],
                     ],
                     [
-                        ['text' => 'SD', 'callback_data' => 'project6'],
+                        [
+                            'text' => 'SD',
+                            'callback_data' => 'project6'
+                        ],
                     ],
                 ]
             ]
@@ -100,42 +123,36 @@ if (isset($data['callback_query'])) {
     $callback_data = $data['callback_query']['data'];
     switch ($callback_data) {
         case 'project1':
-            # Handle user's response to the 'Fragrancia' button
             $method = 'sendMessage';
             $send_data = [
                 'text' => 'You clicked on the Fragrancia button'
             ];
             break;
         case 'project2':
-            # Handle user's response to the 'Holten' button
             $method = 'sendMessage';
             $send_data = [
                 'text' => 'You clicked on the Holten button'
             ];
             break;
         case 'project3':
-            # Handle user's response to the 'ML' button
             $method = 'sendMessage';
             $send_data = [
                 'text' => 'You clicked on the ML button'
             ];
             break;
         case 'project4':
-            # Handle user's response to the 'Qamal' button
             $method = 'sendMessage';
             $send_data = [
                 'text' => 'You clicked on the Qamal button'
             ];
             break;
         case 'project5':
-            # Handle user's response to the 'Ecohorica' button
             $method = 'sendMessage';
             $send_data = [
                 'text' => 'You clicked on the Ecohorica button'
             ];
             break;
         case 'project6':
-            # Handle user's response to the 'SD' button
             $method = 'sendMessage';
             $send_data = [
                 'text' => 'You clicked on the SD button'
