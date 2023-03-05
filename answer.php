@@ -18,10 +18,10 @@ $message = mb_strtolower(($data['text'] ? $data['text'] : $data['data']), 'utf-8
 $keybord = [
                     [
                         ['text' => 'Events list'],
-                        ['text' => '...'],
+                        ['text' => 'Check my current hours'],
                     ],
                     [
-                        ['text' => 'check2'],
+                        ['text' => 'Add Hours'],
                     ]
                 ];
 
@@ -47,7 +47,7 @@ switch (strtolower($message)) {
             ]
         ];
         break;
-    case '...':
+    case 'check my current hours':
         $method = 'sendMessage';
         $send_data = [
             'text'   => 'in progress',
@@ -57,7 +57,7 @@ switch (strtolower($message)) {
             ]
         ];
         break;
-    case 'check2':
+    case 'add hours':
         $method = 'sendMessage';
         $send_data = [
             'text'   => 'Choose your project:',
