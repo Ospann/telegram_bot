@@ -8,12 +8,8 @@ $data = json_decode(file_get_contents('php://input'), TRUE);
 
 
 # Обрабатываем ручной ввод или нажатие на кнопку
-// $data = $data['callback_query'] ? $data['callback_query'] : $data['message'];
-if (isset($data['callback_query'])) {
-    $data = $data['callback_query'];
-} else {
-    $data = $data['message'];
-}
+$data = $data['callback_query'] ? $data['callback_query'] : $data['message'];
+
 # Важные константы
 define('TOKEN', '6170296157:AAGjoKIWQjtMwD_aEE9vYtG0mZSMcZ9toHI');
 
