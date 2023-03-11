@@ -1,5 +1,5 @@
 <?php
-
+file_put_contents('log.txt', print_r($_REQUEST, true));
 $data = json_decode(file_get_contents('php://input'), TRUE);
 //file_put_contents('file.txt', '$data: '.print_r($data, 1)."\n", FILE_APPEND);
 
@@ -146,6 +146,12 @@ if (isset($data['callback_query'])) {
             $method = 'sendMessage';
             $send_data = [
                 'text' => 'You clicked on the Ecohorica button'
+            ];
+            break;
+        case 'fragrancia':
+            $method = 'sendMessage';
+            $send_data = [
+                'text' => 'You clicked on the Fragrancia button'
             ];
             break;
         case 'project6':
