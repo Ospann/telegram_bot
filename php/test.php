@@ -1,116 +1,91 @@
 <?php
-file_put_contents('log.txt', print_r($_REQUEST, true));
-$data = json_decode(file_get_contents('php://input'), TRUE);
+// Set up constants
+define('BOT_TOKEN', '6170296157:AAGjoKIWQjtMwD_aEE9vYtG0mZSMcZ9toHI');
+define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
 
-// Important constants
-define('TOKEN', '6170296157:AAGjoKIWQjtMwD_aEE9vYtG0mZSMcZ9toHI');
+// Get the incoming message data
+$update = json_decode(file_get_contents('php://input'), true);
 
-// Define keyboard
-$keyboard = [
-  [
-    ['text' => 'Events list'],
-    ['text' => 'Check my current hours'],
-  ],
-  [
-    ['text' => 'Add Hours'],
-  ]
-];
-
-// Process message or button press
-if (isset($data['callback_query'])) {
-  // User clicked on a button in the inline keyboard
-  $callback_data = $data['callback_query']['data'];
-  switch ($callback_data) {
-    case 'project1':
-      $method = 'sendMessage';
-      $send_data = [
-        'text' => 'You clicked on the Fragrancia button'
-      ];
-      break;
-    case 'project2':
-      $method = 'sendMessage';
-      $send_data = [
-        'text' => 'You clicked on the Holten button'
-      ];
-      break;
-    case 'project3':
-      $method = 'sendMessage';
-      $send_data = [
-        'text' => 'You clicked on the ML button'
-      ];
-      break;
-    case 'project4':
-      $method = 'sendMessage';
-      $send_data = [
-        'text' => 'You clicked on the Qamal button'
-      ];
-      break;
-    case 'project5':
-      $method = 'sendMessage';
-      $send_data = [
-        'text' => 'You clicked on the Ecohorica button'
-      ];
-      break;
-    case 'project6':
-      $method = 'sendMessage';
-      $send_data = [
-        'text' => 'You clicked on the SD button'
-      ];
-      break;
-    default:
-      $method = 'sendMessage';
-      $send_data = [
-        'text' => 'Error'
-      ];
-      break;
-  }
-} else {
-  // User sent a message
-  $message = mb_strtolower(($data['text'] ? $data['text'] : $data['data']), 'utf-8');
-
-  switch (strtolower($message)) {
-    case 'events list':
-      $method = 'sendMessage';
-      $send_data = [
-        'text' => 'Here are the events:'
-        // Add code to fetch and display events
-      ];
-      break;
-    case 'check my current hours':
-      $method = 'sendMessage';
-      $send_data = [
-        'text' => 'Here are your current hours:'
-        // Add code to fetch and display hours
-      ];
-      break;
-    case 'add hours':
-      $method = 'sendMessage';
-      $send_data = [
-        'text' => 'Please enter the hours you want to add:'
-        // Add code to prompt user for hours input
-      ];
-      break;
-    default:
-      $method = 'sendMessage';
-      $send_data = [
-        'text' => 'Please select an option from the keyboard'
-      ];
-      break;
-  }
+// Check if the message contains text
+if (isset($update['message']['text'])) {
+    $message = $update['message']['text'];
+    $chat_id = $update['message']['chat']['id'];
+    $keyboard = array(
+        "keyboard" => array(
+            array("Add hours"),
+            array("Events List", "Check hours")
+        ),
+        "resize_keyboard" => true
+    );
+    switch ($message) {
+        case 'Add hours':
+            $projects_keyboard = array(
+                "inline_keyboard" => array(
+                    array(array("text" => "Fragrancia", "callback_data" => "Fragrancia")),
+                    array(array("text" => "ML", "callback_data" => "ML")),
+                    array(array("text" => "Holten", "callback_data" => "Holten"))
+                )
+            );
+            $text = "Choose your project:";
+            sendMessage($chat_id, $text, $projects_keyboard);
+            break;
+        case 'Events List':
+            $text = "Here are the events:";
+            sendMessage($chat_id, $text, $keyboard);
+            break;
+        case 'Check hours':
+            $text = "Here are your current hours:";
+            sendMessage($chat_id, $text, $keyboard);
+            break;
+        default:
+            $text = "Please select an option from the keyboard";
+            sendMessage($chat_id, $text, $keyboard);
+            break;
+    }
+}
+// Check if the message contains an inline keyboard callback query
+else if (isset($update['callback_query'])) {
+    $callback_query = $update['callback_query'];
+    $callback_query_id = $callback_query['id'];
+    $callback_data = $callback_query['data'];
+    $chat_id = $callback_query['message']['chat']['id'];
+    switch ($callback_data) {
+        case 'Fragrancia':
+            $subprojects_keyboard = array(
+                "inline_keyboard" => array(
+                    array(array("text" => "AKylbek", "callback_data" => "AKylbek")),
+                    array(array("text" => "Aslan", "callback_data" => "Aslan"))
+                )
+            );
+            $text = "Choose subproject:";
+            sendMessage($chat_id, $text, $subprojects_keyboard);
+            break;
+        case 'ML':
+            $text = "ML hours";
+            sendMessage($chat_id, $text);
+            break;
+        case 'Holten':
+            $text = "Holten hours";
+            sendMessage($chat_id, $text);
+            break;
+        case 'AKylbek':
+            $text = "Hours been uploaded!";
+            sendMessage($chat_id, $text);
+            break;
+        case 'Aslan':
+            $text = "Hours been uploaded!";
+            sendMessage($chat_id, $text);
+            break;
+        default:
+            break;
+    }
 }
 
-// Send response to user
-$url = 'https://api.telegram.org/bot' . TOKEN . '/' . $method;
-$send_data['chat_id'] = $data['message']['chat']['id'];
-$send_data['reply_markup'] = json_encode([
-  'inline_keyboard' => $keyboard
-]);
-$options = [
-  'http' => [
-    'header' => "Content-Type:application/json\r\n",
-    'method' => 'POST',
-    'content' => json_encode($send_data)
-  ]
-];
-$context = stream_context_create($options);
-$result = file_get_contents($url, false, $context);
+// Function to send messages
+function sendMessage($chat_id, $text, $reply_markup = null) {
+    $url = API_URL.'sendMessage?chat_id='.$chat_id.'&text='.urlencode($text);
+    if ($reply_markup) {
+        $url .= '&reply_markup='.json_encode($reply_markup);
+    }
+    file_get_contents($url);
+}
