@@ -86,23 +86,20 @@ else if (isset($update['callback_query'])) {
 
 
     foreach ($projects as $row) {
-        try {
-            if ($callback_data === $row) {
-                $inline = [];
-                foreach ($subProjects as $subarray) {
-                    if ($subarray[0] == $callback_data) {
-                        $inline[] = $subarray[1];
-                    }
+        if ($callback_data === $row) {
+            $inline = [];
+            foreach ($subProjects as $subarray) {
+                sendMessage($chat_id, $subarray[0], []);
+                if ($subarray[0] == $callback_data) {
+                    $inline[] = $subarray[1];
                 }
-                $subprojects_keyboard = array(
-                    "inline_keyboard" => $inline
-                );
-                $text = "Choose subproject:";
-                sendMessage($chat_id, $text, $subprojects_keyboard);
-                break;
             }
-        } catch (Exception $e) {
-            sendMessage($chat_id, $e, []);
+            // $subprojects_keyboard = array(
+            //     "inline_keyboard" => $inline
+            // );
+            // $text = "Choose subproject:";
+            // sendMessage($chat_id, $text, $subprojects_keyboard);
+            // break;
         }
     }
 }
