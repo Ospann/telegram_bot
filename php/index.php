@@ -1,4 +1,5 @@
 <?php
+require './googleApi.php';
 // Set up constants
 define('BOT_TOKEN', '6170296157:AAGjoKIWQjtMwD_aEE9vYtG0mZSMcZ9toHI');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
@@ -11,20 +12,16 @@ if (isset($update['message']['text'])) {
     $message = $update['message']['text'];
     $chat_id = $update['message']['chat']['id'];
     $keyboard = array(
-        "keyboard" => array(
-            array("Add hours"),
-            array("Events List", "Check hours")
-        ),
+        "keyboard" => [
+            ["Add hours"],
+            ["Events List", "Check hours"]
+        ],
         "resize_keyboard" => true
     );
     switch ($message) {
         case 'Add hours':
             $projects_keyboard = array(
-                "inline_keyboard" => array(
-                    array(array("text" => "Fragrancia", "callback_data" => "Fragrancia")),
-                    array(array("text" => "ML", "callback_data" => "ML")),
-                    array(array("text" => "Holten", "callback_data" => "Holten"))
-                )
+                "inline_keyboard" => getProjects()
             );
             $text = "Choose your project:";
             sendMessage($chat_id, $text, $projects_keyboard);
