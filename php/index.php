@@ -21,6 +21,12 @@ if (isset($update['message']['text'])) {
     );
     switch ($message) {
         case 'Add hours':
+            $keyboard = [];
+            foreach ($projects as $sub) {
+                array_push($keyboard, [
+                    ["text" => $sub, "callback_data" => $sub]
+                ]);
+            }
             $projects_keyboard = array(
                 "inline_keyboard" => $projects
             );
@@ -80,14 +86,14 @@ else if (isset($update['callback_query'])) {
 
 
     foreach ($projects as $row) {
-        try{
+        try {
             sendMessage($chat_id, $projects[0], []);
             if ($callback_data === $row) {
                 $inline = [];
                 foreach ($subProjects as $sub) {
                     if ($sub[0] === $row) {
                         array_push($inline, [
-                            ["text" => $sub[1], "callback_data"=>$sub[1]]
+                            ["text" => $sub[1], "callback_data" => $sub[1]]
                         ]);
                     }
                 }
@@ -98,7 +104,7 @@ else if (isset($update['callback_query'])) {
                 sendMessage($chat_id, $text, $subprojects_keyboard);
                 break;
             }
-        }catch(Exception $e){
+        } catch (Exception $e) {
             sendMessage($chat_id, $e, []);
         }
     }

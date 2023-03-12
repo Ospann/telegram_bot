@@ -18,11 +18,14 @@ function getProjects()
     // $response = $service->spreadsheets_values->get($spreadsheetId, $range);
     // $values = $response->getValues();
     // return $values;
-    return  [
-        [["text" => "Fragrancia", "callback_data" => "Fragrancia"]],
-        [["text" => "MindLogistics", "callback_data" => "MindLogistics"]],
-        [["text" => "Holten Impex", "callback_data" => "Holten Impex"]]
+    return [
+        "Fragrancia","MindLogistics","Holten Impex"
     ];
+    // return  [
+    //     [["text" => "Fragrancia", "callback_data" => "Fragrancia"]],
+    //     [["text" => "MindLogistics", "callback_data" => "MindLogistics"]],
+    //     [["text" => "Holten Impex", "callback_data" => "Holten Impex"]]
+    // ];
 }
 
 /**
