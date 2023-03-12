@@ -102,6 +102,12 @@ else if (isset($update['callback_query'])) {
             sendMessage($chat_id, $text, $subprojects_keyboard);
             break;
         }
+        foreach ($subProjects as $subarray) {
+            if ($callback_data === $subarray[1] && $subarray[0] === $row) {
+                $text = "Hours have been added \n\n$row\n$subarray[1]";
+                sendMessage($chat_id, $text, []);
+            }
+        }
     }
 }
 
