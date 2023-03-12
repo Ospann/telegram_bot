@@ -53,38 +53,6 @@ else if (isset($update['callback_query'])) {
     $callback_query_id = $callback_query['id'];
     $callback_data = $callback_query['data'];
     $chat_id = $callback_query['message']['chat']['id'];
-    // switch ($callback_data) {
-    //     case 'Fragrancia':
-    //         $subprojects_keyboard = array(
-    //             "inline_keyboard" => array(
-    //                 array(array("text" => "AKylbek", "callback_data" => "AKylbek")),
-    //                 array(array("text" => "Aslan", "callback_data" => "Aslan"))
-    //             )
-    //         );
-    //         $text = "Choose subproject:";
-    //         sendMessage($chat_id, $text, $subprojects_keyboard);
-    //         break;
-    //     case 'MindLogistics':
-    //         $text = "ML hours";
-    //         sendMessage($chat_id, $text);
-    //         break;
-    //     case 'Holten Impex':
-    //         $text = "Holten hours";
-    //         sendMessage($chat_id, $text);
-    //         break;
-    //     case 'AKylbek':
-    //         $text = "Hours been uploaded!";
-    //         sendMessage($chat_id, $text);
-    //         break;
-    //     case 'Aslan':
-    //         $text = "Hours been uploaded!";
-    //         sendMessage($chat_id, $text);
-    //         break;
-    //     default:
-    //         break;
-    // }
-
-
     foreach ($projects as $row) {
         if ($callback_data === $row) {
             $inline = [];
