@@ -89,7 +89,7 @@ else if (isset($update['callback_query'])) {
         if ($callback_data === $row) {
             $inline = [];
             foreach ($subProjects as $subarray) {
-                sendMessage($chat_id, $subarray[0], []);
+                sendMessage($chat_id, $subarray[0] == $callback_data, []);
                 if ($subarray[0] == $callback_data) {
                     $inline[] = $subarray[1];
                 }
