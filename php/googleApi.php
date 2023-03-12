@@ -8,8 +8,8 @@ function getProjects()
 {
     return  [
         [["text" => "Fragrancia", "callback_data" => "Fragrancia"]],
-        [["text" => "ML", "callback_data" => "ML"]],
-        [["text" => "Holten", "callback_data" => "Holten"]]
+        [["text" => "MindLogistics", "callback_data" => "MindLogistics"]],
+        [["text" => "Holten Impex", "callback_data" => "Holten Impex"]]
     ];
 }
 
@@ -40,7 +40,6 @@ function subProjects()
 
     return $subprojects;
 }
-var_dump(subProjects());
 
 function getHours()
 {
