@@ -28,7 +28,7 @@ if (isset($update['message']['text'])) {
                 ]);
             }
             $projects_keyboard = array(
-                "inline_keyboard" => $projects
+                "inline_keyboard" => $keyboard
             );
             $text = "Choose your project:";
             sendMessage($chat_id, $text, $projects_keyboard);
