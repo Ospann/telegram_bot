@@ -81,6 +81,7 @@ else if (isset($update['callback_query'])) {
 
     foreach ($projects as $row) {
         try{
+            sendMessage($chat_id, $callback_data, []);
             if ($callback_data === $row) {
                 $inline = [];
                 foreach ($subProjects as $sub) {
