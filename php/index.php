@@ -98,7 +98,7 @@ else if (isset($update['callback_query'])) {
             $subprojects_keyboard = array(
                 "inline_keyboard" => $inline
             );
-            $text = "$row -> Choose subproject:";
+            $text = "$row➡️ Choose subproject:";
             sendMessage($chat_id, $text, $subprojects_keyboard);
             break;
         }
