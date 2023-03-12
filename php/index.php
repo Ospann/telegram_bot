@@ -90,6 +90,7 @@ else if (isset($update['callback_query'])) {
             if ($callback_data === $row) {
                 $inline = [];
                 foreach ($subProjects as $sub) {
+                    sendMessage($chat_id, $sub[0], []);
                     if ($sub[0] === $row) {
                         array_push($inline, [
                             ["text" => $sub[1], "callback_data" => $sub[1]]
