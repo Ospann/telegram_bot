@@ -39,6 +39,7 @@ function subProjects()
     // $values = $response->getValues();
     $values = [
         ["Fragrancia", "Абон. обслуживание"],
+        ["Fragrancia", "React NodeJs"],
         ["Holten Impex", "Абон. обслуживание"],
         ["MindLogistics", "Development"],
     ];
