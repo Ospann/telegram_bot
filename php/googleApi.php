@@ -42,18 +42,19 @@ function subProjects()
         ["Holten Impex", "Абон. обслуживание"],
         ["MindLogistics", "Development"],
     ];
-    $subprojects = [];
-    if (!empty($values)) {
-        foreach ($values as $row) {
-            if (isset($row[0]) && isset($row[1])) {
-                array_push($subprojects, [
-                    $row[0] => $row[1]
-                ]);
-            }
-        }
-    }
+    // $subprojects = [];
+    // if (!empty($values)) {
+    //     foreach ($values as $row) {
+    //         if (isset($row[0]) && isset($row[1])) {
+    //             array_push($subprojects, [
+    //                 $row[0] => $row[1]
+    //             ]);
+    //         }
+    //     }
+    // }
 
-    return $subprojects;
+    // return $subprojects;
+    return $values;
 }
 
 /**
